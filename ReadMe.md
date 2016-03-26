@@ -6,4 +6,4 @@
     根据反馈，将可设置参数进一步拓展，并采用RecycleView设计一套控件
 ##效果展示
   ![这里写图片描述]
-  (http://github.com/d198965/ExpandTagGridBar/raw/master/images-folder/1.png)
+  (https://github.com/d198965/ExpandTagGridBar/blob/master/1.png)
