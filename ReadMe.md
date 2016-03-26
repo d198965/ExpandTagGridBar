@@ -5,5 +5,6 @@
 ##后续扩展
     根据反馈，将可设置参数进一步拓展，并采用RecycleView设计一套控件
 ##效果展示
+    当有10组数据时，每行4列。第一个是没有伸缩条时，第二个有伸缩条
   ![这里写图片描述]
   (https://github.com/d198965/ExpandTagGridBar/blob/master/1.png)
