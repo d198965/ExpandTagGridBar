@@ -102,13 +102,12 @@ public class ExpandTagNaviGridBar extends LinearLayout implements View.OnClickLi
         mCategoryGirdView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     int height = 0;
-
                     @Override
                     public void onGlobalLayout() {
-                        if (height == 0) {
+                        if (height != mCategoryGirdView.getHeight()) {
+                            height = mCategoryGirdView.getHeight();
                             calculateVisibleInvisibleHeight();
                         }
-                        height = mCategoryGirdView.getHeight();
                     }
                 });
         mHeaderAdapter.setColumnNum(mHeaderAdapter.mColumnNum);

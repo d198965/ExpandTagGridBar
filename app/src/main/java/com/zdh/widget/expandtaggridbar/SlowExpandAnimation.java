@@ -18,26 +18,23 @@ import android.widget.LinearLayout.LayoutParams;
  */
 public class SlowExpandAnimation extends Animation {
     OnExpendAnimationListener onAnimationListener;
+    //需要伸缩显隐的动画控件
     private View mAnimatedView;
     private LayoutParams mViewLayoutParams;
+    //bottomMargin的起始值和终止值
     private int mMarginStart, mMarginEnd;
+    //标记操作是否结束
     private boolean mWasEndedAlready = false;
     private OnExpendActionListener onExpendActionListener;
 
-    /**
-     * Initialize the animation
-     *
-     * @param view     The layout we want to animate
-     * @param duration The duration of the animation, in ms
-     */
+    // duration:动画时间
+    // marginEnd:bottomMargin终止位置
     public SlowExpandAnimation(View view, int duration,int marginEnd) {
 
         setDuration(duration);
         mAnimatedView = view;
         mViewLayoutParams = (LayoutParams) view.getLayoutParams();
-
-        // if the bottom margin is 0,
-        // then after the animation will end it'll be negative, and invisible.
+        // mMarginStart的值是初始的bottomMargin
         mMarginStart = mViewLayoutParams.bottomMargin;
         mMarginEnd = marginEnd;
 
@@ -52,8 +49,6 @@ public class SlowExpandAnimation extends Animation {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
@@ -70,20 +65,17 @@ public class SlowExpandAnimation extends Animation {
         super.applyTransformation(interpolatedTime, t);
 
         if (interpolatedTime < 1.0f) {
-
-            // Calculating the new bottom margin, and setting it
+            // 设置bottomMargin
             mViewLayoutParams.bottomMargin = mMarginStart
                     + (int) ((mMarginEnd - mMarginStart) * interpolatedTime);
-
-            // Invalidating the layout, making us seeing the changes we made
+            // 记得一定要更新！
             mAnimatedView.requestLayout();
 
             if (onExpendActionListener != null) {
                 onExpendActionListener.onExpendAction((View) mAnimatedView.getParent());
             }
-
-            // Making sure we didn't run the ending before (it happens!)
         } else if (!mWasEndedAlready) {
+            // 最后要确定mMarginEnd赋值到bottomMargin
             mViewLayoutParams.bottomMargin = mMarginEnd;
             mAnimatedView.requestLayout();
 
@@ -112,3 +104,5 @@ public class SlowExpandAnimation extends Animation {
         public void onAnimationEnd();
     }
 }
+
+
