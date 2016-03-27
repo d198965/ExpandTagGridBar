@@ -98,7 +98,6 @@ public class ExpandTagNaviGridBar extends LinearLayout implements View.OnClickLi
 
     private void initCategoryGirdAndExpand() {
         mHasSetExpand = true;
-        mExpandView.setVisibility(View.VISIBLE);
         mCategoryGirdView.removeAllViews();
         mCategoryGirdView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -222,6 +221,9 @@ public class ExpandTagNaviGridBar extends LinearLayout implements View.OnClickLi
                     TableRow tableRow = (TableRow) view;
                     mExpandPositon += tableRow.getHeight() * -1;
                 }
+            }
+            if (mExpandPositon < 0){
+                mExpandView.setVisibility(View.VISIBLE);
             }
             if (!mIsExpand) {
                 mGridViewLP.bottomMargin = mExpandPositon;
